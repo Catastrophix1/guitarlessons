@@ -683,6 +683,15 @@ h3 {
     height: 100%;
 }
 
+.video-embed p {
+    position: relative;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+    text-align: center;
+    padding-top: calc(56.25% + 0.5rem);
+}
+
 /* ========================================
    Contact Section
    ======================================== */
