@@ -162,9 +162,30 @@ function initFormValidation() {
             isValid = false;
         }
 
-        if (!isValid) {
-            e.preventDefault();
-        }
+        e.preventDefault();
+        if (!isValid) return;
+
+        const btn = form.querySelector('button[type="submit"]');
+        btn.textContent = 'Sending...';
+        btn.disabled = true;
+
+        fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+        }).then(response => {
+            if (response.ok) {
+                form.innerHTML = '<p style="text-align:center;font-size:1.2rem;color:var(--accent);padding:2rem 0;">Thanks for your message! I\'ll get back to you soon.</p>';
+            } else {
+                btn.textContent = 'Send Message';
+                btn.disabled = false;
+                alert('Something went wrong. Please try again.');
+            }
+        }).catch(() => {
+            btn.textContent = 'Send Message';
+            btn.disabled = false;
+            alert('Something went wrong. Please try again.');
+        });
     });
 }
 
